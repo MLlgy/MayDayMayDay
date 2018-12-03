@@ -3,4 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="transparent">#00bfb7b7</color>
+    <color name="origin">#90ed9610</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="sherpa_orange">#deaa1b</color>
+    <color name="compress_exit">#D8D8D8</color>
+
+
 </resources>
