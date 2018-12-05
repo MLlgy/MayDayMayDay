@@ -21,6 +21,7 @@ public class CustomClock extends View {
     private int mRadiu;
     private RectF mRectF;
     private Paint mTextPaint;
+    private Paint mLinePaint;
 
     public CustomClock(Context context) {
         this(context, null);
@@ -58,21 +59,38 @@ public class CustomClock extends View {
         mTextPaint = new Paint();
         mTextPaint.setTextSize(50f);
         mTextPaint.setColor(getResources().getColor(R.color.colorWhite, null));
+
+        mLinePaint = new Paint();
+        mLinePaint.setColor(getResources().getColor(R.color.colorGray, null));
+        mLinePaint.setAntiAlias(true);
+        mLinePaint.setStrokeWidth(6f);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.save();
-        canvas.drawLine(mWidth / 2, 0, mWidth / 2, mHeight, mArchPaint);
-        canvas.drawLine(0, mHeight / 2, mWidth, mHeight / 2, mArchPaint);
+//        canvas.drawLine(mWidth / 2, 0, mWidth / 2, mHeight, mArchPaint);
+//        canvas.drawLine(0, mHeight / 2, mWidth, mHeight / 2, mArchPaint);
 //        canvas.translate(mWidth / 2, mHeight / 2);
-        for (int i = 0; i < 4; i++) {
-            canvas.drawArc(mRectF, 5, 80, false, mArchPaint);
-            canvas.rotate(90f, mWidth / 2, mHeight / 2);
-            String mNum = String.valueOf(3 * (i + 1));
-            canvas.drawText(mNum, mWidth / 2 - mTextPaint.measureText(mNum) / 2, mHeight / 2 - mRadiu + 20, mTextPaint);
-        }
 
+//        for (int i = 0; i < 4; i++) {
+//            canvas.drawArc(mRectF, 5, 80, false, mArchPaint);
+//            canvas.rotate(90f, mWidth / 2, mHeight / 2);
+//            String mNum = String.valueOf(3 * (i + 1));
+//            canvas.drawText(mNum, mWidth / 2 - mTextPaint.measureText(mNum) / 2, mHeight / 2 - mRadiu + 20, mTextPaint);
+//        }
+        canvas.rotate(90, mWidth / 2, mHeight / 2);
+        for (int i = 0; i < 60; i++) {
+            if (i == 0 || i == 15 || i == 30 || i == 45) {
+                canvas.drawArc(mRectF, 5, 80, false, mArchPaint);
+                String mNum = String.valueOf((i / 15 + 1) * 3);
+                canvas.drawText(mNum, mWidth / 2 - mTextPaint.measureText(mNum) / 2, mHeight / 2 - mRadiu + 20, mTextPaint);
+
+            } else {
+                canvas.drawLine(mWidth / 2, mHeight / 2 - mRadiu + 40, mWidth / 2, mHeight / 2 - mRadiu + 90, mLinePaint);
+            }
+            canvas.rotate(6, mWidth / 2, mHeight / 2);
+        }
+        canvas.save();
     }
 }
