@@ -37,7 +37,9 @@ public class CustomClock extends View {
                 mWidth = getMeasuredWidth();
                 mHeight = getMeasuredHeight();
                 mRadiu = mWidth * 3 / 7;
-                mRectF = new RectF(-mRadiu, -mRadiu, mRadiu, mRadiu);
+//                mRectF = new RectF(-mRadiu, -mRadiu, mRadiu, mRadiu);
+                mRectF = new RectF(mWidth / 14, mHeight / 2 - mRadiu,
+                        mRadiu * 2 + mWidth / 14, mHeight / 2 + mRadiu);
             }
         });
         mArchPaint = new Paint();
@@ -51,16 +53,13 @@ public class CustomClock extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-//        canvas.drawCircle(mWidth / 2, mHeight / 2, mWidth * 3 / 7, mCirclePaint);
-//        canvas.drawRect(mRectF, mCirclePaint);
         canvas.save();
-        canvas.translate(mWidth / 2, mHeight / 2);
-//        canvas.drawArc(mRectF, 5, 85, false, mCirclePaint);
-
+//        canvas.translate(mWidth / 2, mHeight / 2);
         for (int i = 0; i < 4; i++) {
-            canvas.drawArc(mRectF, 5, 80, false, mCirclePaint);
-            canvas.rotate(90f);
+            canvas.drawArc(mRectF, 5, 80, true, mCirclePaint);
+            canvas.rotate(90f, mWidth / 2, mHeight / 2);
             String mNum = String.valueOf(3 * (i + 1));
+//            canvas.drawText(mNum,);
         }
 
     }
