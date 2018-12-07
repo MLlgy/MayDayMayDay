@@ -132,15 +132,15 @@ public class CustomClock extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         mWidth = w;
         mHeight = h;
-        mRadiu = Math.min(mWidth, mHeight) * 3 / 7;
-        mRectF = new RectF(mWidth / 14, mHeight / 2 - mRadiu,
-                mRadiu * 2 + mWidth / 14, mHeight / 2 + mRadiu);
+        mRadiu = Math.min(mWidth,mHeight) * 3 / 7;
+        mRectF = new RectF(mWidth / 2 - mRadiu, mHeight / 2 - mRadiu,
+                mRadiu  + mWidth / 2, mHeight / 2 + mRadiu);
         mShadowWidth = 0.12f * mRadiu;
         mShadowPaint.setStrokeWidth(mShadowWidth);
 
-        mShadowRectF = new RectF(mWidth / 14 + mShadowWidth * 1.5f,
+        mShadowRectF = new RectF(mWidth / 2 - mRadiu + mShadowWidth * 1.5f,
                 mHeight / 2 - mRadiu + mShadowWidth * 1.5f,
-                mRadiu * 2 + mWidth / 14 - mShadowWidth * 1.5f,
+                mRadiu   + mWidth / 2 - mShadowWidth * 1.5f,
                 mHeight / 2 + mRadiu - mShadowWidth * 1.5f);
         mShadowGradient = new SweepGradient(mWidth / 2, mHeight / 2,
                 new int[]{Color.parseColor("#80ffffff"), Color.parseColor("#ffffff")}, new float[]{0.75f, 1});
@@ -150,6 +150,7 @@ public class CustomClock extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        canvas.drawRect(mRectF,mArchPaint);
         getDate();
         canvas.drawLine(mWidth / 2, 0, mWidth / 2, mHeight, mArchPaint);
         canvas.drawLine(0, mHeight / 2, mWidth, mHeight / 2, mArchPaint);
