@@ -2,5 +2,19 @@
 <resources>
     <declare-styleable name="CircleView">
         <attr name="circle_color" format="color"/>
+        <attr name="textShow" format="string"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="ClockView">
+        <attr name="bac_color" format="color|reference"/>
+        <attr name="text_color" format="color"/>
+        <attr name="text_size" format="dimension"/>
+        <attr name="sec_color" format="color"/>
+        <attr name="hour_color" format="color"/>
+        <attr name="min_color" format="color"/>
+        <!--<attr name="min_color" format="enum">-->
+            <!--<enum name="fdf" value=""-->
+        <!--</attr>-->
     </declare-styleable>
 </resources>

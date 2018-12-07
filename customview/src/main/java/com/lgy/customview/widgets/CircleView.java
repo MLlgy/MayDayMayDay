@@ -19,6 +19,7 @@ public class CircleView extends View {
     private int mHeigth;
     private int mRadiu;
     private int mColor;
+    private String mText;
 
     public CircleView(Context context) {
         this(context, null);
@@ -30,10 +31,10 @@ public class CircleView extends View {
 
     public CircleView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context,attrs);
+        init(context, attrs);
     }
 
-    private void init(Context context,AttributeSet attrs) {
+    private void init(Context context, AttributeSet attrs) {
 
         this.post(new Runnable() {
             @Override
@@ -43,23 +44,29 @@ public class CircleView extends View {
                 int paddingRight = getPaddingRight();
                 int paddingBottom = getPaddingBottom();
                 mWidth = getWidth() - paddingLeft - paddingRight;
-                mHeigth = getHeight()- paddingBottom - paddingTop;
+                mHeigth = getHeight() - paddingBottom - paddingTop;
                 mRadiu = Math.min(mWidth, mHeigth) / 2;
             }
         });
 
         TypedArray mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.CircleView);
-        mColor = mTypedArray.getColor(R.styleable.CircleView_circle_color,Color.BLACK);
+        mColor = mTypedArray.getColor(R.styleable.CircleView_circle_color, Color.BLACK);
         mTypedArray.recycle();
-        mPaint.setColor(mColor);
-//        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setColor(Color.RED);
+        mPaint.setStrokeWidth(4f);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawCircle(mWidth / 2+ getPaddingLeft(),  mHeigth / 2 + getPaddingTop(), mRadiu, mPaint);
-        canvas.drawLine(0,mWidth,mWidth,mWidth,mPaint);
+        canvas.drawCircle(mWidth / 2 + getPaddingLeft(), mHeigth / 2 + getPaddingTop(), mRadiu, mPaint);
+        canvas.drawLine(getLeft(), getTop()+ getMeasuredHeight()/2, getRight(), getTop() + getMeasuredHeight()/2,mPaint);
 
     }
 }
