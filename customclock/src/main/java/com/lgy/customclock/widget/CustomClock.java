@@ -102,23 +102,40 @@ public class CustomClock extends View {
 //            String mNum = String.valueOf(3 * (i + 1));
 //            canvas.drawText(mNum, mWidth / 2 - mTextPaint.measureText(mNum) / 2, mHeight / 2 - mRadiu + 20, mTextPaint);
 //        }
-        canvas.rotate(90, mWidth / 2, mHeight / 2);
-        for (int i = 0; i < 60; i++) {
-            if (i == 0 || i == 15 || i == 30 || i == 45) {
-                canvas.drawArc(mRectF, 5, 80, false, mArchPaint);
-                String mNum = String.valueOf((i / 15 + 1) * 3);
-                mTextPaint.getTextBounds(mNum,0,mNum.length(),mTextRect);
-                canvas.drawLine(mWidth / 2, mHeight / 2 - mRadiu + 40, mWidth / 2, mHeight / 2 - mRadiu + 90, mLinePaint);
-                canvas.drawText(mNum, mWidth / 2 - mTextPaint.measureText(mNum) / 2, mHeight / 2 - mRadiu + 20, mTextPaint);
 
-            } else {
-                canvas.drawLine(mWidth / 2, mHeight / 2 - mRadiu + 40, mWidth / 2, mHeight / 2 - mRadiu + 90, mLinePaint);
-            }
-            canvas.rotate(6, mWidth / 2, mHeight / 2);
-        }
+//        canvas.drawRect(mRectF, mLinePaint);
+        drawArcText(canvas);
+//        canvas.rotate(90, mWidth / 2, mHeight / 2);
+//        for (int i = 0; i < 60; i++) {
+//            if (i == 0 || i == 15 || i == 30 || i == 45) {
+//                canvas.drawArc(mRectF, 5, 80, false, mArchPaint);
+//                String mNum = String.valueOf((i / 15 + 1) * 3);
+//                mTextPaint.getTextBounds(mNum, 0, mNum.length(), mTextRect);
+//                canvas.drawLine(mWidth / 2, mHeight / 2 - mRadiu + 40, mWidth / 2, mHeight / 2 - mRadiu + 90, mLinePaint);
+//                canvas.drawText(mNum, mWidth / 2 - mTextRect.height() / 2, mHeight / 2 - mRadiu + mTextRect.height() / 2, mTextPaint);
+//
+//            } else {
+//                canvas.drawLine(mWidth / 2, mHeight / 2 - mRadiu + 40, mWidth / 2, mHeight / 2 - mRadiu + 90, mLinePaint);
+//            }
+//            canvas.rotate(6, mWidth / 2, mHeight / 2);
+//        }
         canvas.save();
         canvas.drawCircle(mWidth / 2, mHeight / 2, 9, mCirclePaint);
         canvas.drawLine(mWidth / 2, mHeight / 2 - mRadiu + 110, mWidth / 2, mHeight / 2 - 9, mLinePaint);
+    }
+
+    private void drawArcText(Canvas canvas) {
+        canvas.save();
+        String[] mStrings = new String[]{"12", "3", "6", "9"};
+        // drawText 是以文字的做下角为基准，这个很重要
+        mTextPaint.getTextBounds(mStrings[1], 0, mStrings[1].length(), mTextRect);
+        canvas.drawText(mStrings[0], mWidth / 2 - mTextRect.width() / 2 * 3, mRectF.top + mTextRect.height() / 2, mTextPaint);
+        canvas.drawText(mStrings[1], mRectF.right - mTextRect.width() / 2, mHeight / 2 + mTextRect.height() / 2, mTextPaint);
+        canvas.drawText(mStrings[2], mWidth / 2 - mTextRect.width() / 2, mRectF.bottom + mTextRect.height() / 2, mTextPaint);
+        canvas.drawText(mStrings[3], mRectF.left - mTextRect.width() / 2, mHeight / 2 + mTextRect.height() / 2, mTextPaint);
+        for (int i = 0; i < 4; i++) {
+            canvas.drawArc(mRectF, 5 + 90 * i, 80, false, mArchPaint);
+        }
     }
 
 
